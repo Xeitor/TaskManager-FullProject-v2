@@ -4,7 +4,7 @@ docker build --build-arg JAR_FILE=build/libs/\*.jar -t xeitor/task-manager-sprin
 pwd=`pwd`
 dockerfilepath="${pwd}/frontEnd/"
 echo $dockerfilepath
-docker build $dockerfilepath -t task-manager-react
+build $dockerfilepath -t task-manager-react
 
 echo "Ready to run :)"
 
