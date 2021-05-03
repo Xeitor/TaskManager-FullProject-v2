@@ -1,0 +1,87 @@
+### Folders
+### Crear carpeta
+PATCH http://localhost:8080/folder/5
+Content-Type: application/x-www-form-urlencoded
+
+name=folder nuevo 2
+
+<> 2021-04-28T110546.200.txt
+<> 2021-04-28T110406.200.txt
+<> 2021-04-28T105454.200.txt
+###
+##PATCH http://localhost:8080/folder/1
+##Content-Type: application/x-www-form-urlencoded
+
+##name=folder2
+
+##<> 2021-04-28T110407.405.json
+##<> 2021-04-28T105917.405.json
+##<> 2021-04-28T105454.405.json
+
+### Listar folders
+GET http://localhost:8080/folder/all
+
+<> 2021-04-28T110546.200.json
+<> 2021-04-28T110407.200.json
+<> 2021-04-28T105455.200.json
+
+### Get folder id=1
+GET http://localhost:8080/folder/8
+
+<> 2021-04-28T110546-1.200.json
+<> 2021-04-28T110407-1.200.json
+<> 2021-04-28T105455.404.json
+
+### Get tasks in folder id=3
+GET http://localhost:8080/folder/8/tasks
+
+<> 2021-04-28T110546-1.200.json
+<> 2021-04-28T110407-1.200.json
+<> 2021-04-28T105455.404.json
+
+### Delete folder id=1
+DELETE http://localhost:8080/folder/6
+
+<> 2021-04-28T110546-2.200.json
+<> 2021-04-28T110407-2.200.json
+<> 2021-04-28T105455-1.404.json
+
+
+### Tasks
+### Crear task
+POST http://localhost:8080/task/add
+Content-Type: application/x-www-form-urlencoded
+
+description=task1
+
+<> 2021-04-28T110547.200.txt
+<> 2021-04-28T110408.400.json
+<> 2021-04-28T105456.400.json
+### Get all task
+GET http://localhost:8080/task/all
+
+<> 2021-04-28T110547.200.json
+<> 2021-04-28T110408.200.json
+<> 2021-04-28T105456.200.json
+
+### Get task 1
+GET http://localhost:8080/task/2
+
+<> 2021-04-28T110547.404.json
+<> 2021-04-28T110408.404.json
+<> 2021-04-28T105456.404.json
+
+### Update task 1
+PATCH http://localhost:8080/task/1
+Content-Type: application/x-www-form-urlencoded
+
+state=COMPLETADA&folderId=8
+<> 2021-04-28T110548.404.json
+<> 2021-04-28T110408-1.404.json
+<> 2021-04-28T105456-1.404.json
+### Delete task 1
+DELETE http://localhost:8080/task/1
+
+<> 2021-04-28T110548-1.404.json
+<> 2021-04-28T110408-2.404.json
+<> 2021-04-28T105457.404.json

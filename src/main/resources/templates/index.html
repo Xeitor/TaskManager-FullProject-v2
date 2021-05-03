@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>ReactJS + Spring Data REST</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+
+<div id="react"></div>
+
+<script>
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp;
+}
+function test() {
+
+  const response =httpGet(`http://localhost:8080/task/all`);
+  const json = response.json();
+  const formattedTasks = json.map((obj, i) => {
+    return {
+      id: 123,
+      description: obj.name,
+      state: obj.state,
+      folderName: obj.folderName,
+      folderId: obj.folderId
+    };
+  });
+  console.log(formattedTasks);
+}
+test();
+
+</script>
+
+
+</body>
+</html>
