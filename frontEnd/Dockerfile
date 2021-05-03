@@ -10,7 +10,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 RUN apk add yarn
-
+RUN yarn install
 # add app
 COPY . ./
 
