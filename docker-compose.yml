@@ -12,9 +12,9 @@ services:
     ports:
       - 3306:3306
 
-  # Frontend Service
+  # Backend Service
   task-manager-backend:
-    image: xeitor/task-manager-spring
+    image: xeitor/task-manager-spring:latest
     restart: on-failure
     depends_on:
       - task-manager-mysql
@@ -28,7 +28,7 @@ services:
       - DATABASE_PORT=3306
   # Frontend Service
   task-manager-frontend:
-    image: task-manager-react
+    image: task-manager-react:latest
     ports:
       - "3000:3000"
     restart: always
