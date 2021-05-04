@@ -19,7 +19,7 @@ Para el delivery utilicé la herramienta docker, creé containers separados para
 
 Clonar el código
 ```bash
-git clone https://github.com/Xeitor/TaskManager-FullProject.git
+git clone https://github.com/Xeitor/TaskManager-FullProject-2.git
 ```
 Una vez dentro del repositorio ejecutamos el script init.sh. 
 
