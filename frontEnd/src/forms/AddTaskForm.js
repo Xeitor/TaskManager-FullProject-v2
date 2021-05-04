@@ -35,6 +35,7 @@ const AddTaskForm = (props) => {
 
       const requestOptions = {
         method: 'POST',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formBody
       };

@@ -10,6 +10,14 @@ import EditFolderForm from './forms/EditFolderForm';
 var aux = null;
 
 const App = () => {
+  const requestOptionsGet = {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': 'secret'
+    }
+  };
   const [tasksInFolder, setTasksInFolser] = useState(null);
   const showTasksInFolder = (id, name) => {
     tasks = aux;
@@ -21,7 +29,7 @@ const App = () => {
     setTasks(aux);
   }
   async function reFetchTasks() {
-    const response = await fetch(`http://localhost:8080/task/all`);
+    const response = await fetch(`http://localhost:8080/task/all`, requestOptionsGet);
     const tareas = await response.clone().json();
     const formattedTasks = tareas.map((obj, i) => {
       console.log("checkingggg");
@@ -56,7 +64,7 @@ const App = () => {
           const fetchData = async () => {
               try {
                   setLoading(true);
-                  const response = await fetch(`http://localhost:8080/folder/all`);
+                  const response = await fetch(`http://localhost:8080/folder/all`, requestOptionsGet);
                   const json = await response.json();
                   setData(json, setLoading(false));
                   console.log(JSON.stringify(json));
@@ -81,7 +89,7 @@ const App = () => {
           const fetchData = async () => {
               try {
                   setLoading(true);
-                  const response = await fetch(`http://localhost:8080/task/all`);
+                  const response = await fetch(`http://localhost:8080/task/all`, requestOptionsGet);
                   const json = await response.json();
                   setData(json, setLoading(false));
               } catch (err) {
