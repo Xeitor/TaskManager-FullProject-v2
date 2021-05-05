@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins="*")
 public class FolderController {
     @Autowired
     private FolderRepository folderRepository;

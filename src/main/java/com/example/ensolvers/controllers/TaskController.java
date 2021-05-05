@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins="*")
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
