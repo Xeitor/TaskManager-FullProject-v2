@@ -6,25 +6,31 @@ import EditTaskForm from './forms/EditTaskForm';
 import AddFolderForm from './forms/AddFolderForm';
 import EditFolderForm from './forms/EditFolderForm';
 import { serviceGetTask, serviceDeleteTask } from './TaskService';
+import TaskForm from './forms/TaskForm';
 var aux = null;
 
 const App = () => {
+
+  // Tasks
+  const [editing, setEditing] = useState(false);
+  const initialTask = { id: null, description: "", state: "" };
+  const [currentTask, setCurrentTask] = useState(initialTask);
+  const [folders, setFolders] = useState([]);
 
   const [tasks, setTasks] = useState({});
   const [loadingTask, setLoadingTask] = useState(true);
 
   useEffect(() => {
     if (loadingTask) {
-      console.log("wtffff");
       serviceGetTask().then((data) => updateTasks(data))
       setLoadingTask(false);
     }
   }, [loadingTask]);
 
   const addTask = (task) => {
-    //reFetchTasks();
-    //setTaskss([...tasks, task]);
-    //setTaskssInFolser(false);
+    setLoadingTask(true);
+    setCurrentTask(initialTask);
+    //setTasksInFolser(false);
   };
 
   const deleteTask = (id) => {
@@ -36,15 +42,14 @@ const App = () => {
   };
 
   const editTask = (id, task) => {
-    //setEditing(true);
-    //setCurrentTask(task);
+    setEditing(true);
+    setCurrentTask(task);
   };
 
   const updateTask = (newTask) => {
-    //reFetchTasks();
-    //setTaskss();
-    //setCurrentTask(initialTask);
-    //setEditing(false);
+    setLoadingTask(true);
+    setCurrentTask(initialTask);
+    setEditing(false);
     //setTaskssInFolser(false);
   };
 
@@ -60,6 +65,9 @@ const App = () => {
     });
     setTasks(formattedTasks);
   }
+
+  // folders
+
   return (
     <div class="rootDiv">
       <div class="tasks">

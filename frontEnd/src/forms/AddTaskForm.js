@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import TaskForm from './forms/TaskForm';
+import TaskForm from './TaskForm';
 
 const AddTaskForm = (props) => {
 
@@ -53,7 +53,7 @@ const AddTaskForm = (props) => {
           return Promise.reject(error);
         } else {
           //var obj = JSON.parse(data);
-          console.log("data " + JSON.stringify(data));
+          console.log("should add task");
           props.addTask(task);
         }
       })
@@ -66,7 +66,16 @@ const AddTaskForm = (props) => {
   }
 
   return (
-    <
+    <div>
+    <TaskForm
+      task={task}
+      tasks={props.tasks}
+      deleteTask={props.deleteTask}
+      editTask={props.editTask}
+      handleChange={handleChange}
+    />
+    <button className="button-primary" type="submit" onClick={handleSubmit} >Add task</button>
+    </div>
   )
 }
 

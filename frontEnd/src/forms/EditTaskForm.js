@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import TaskForm from './forms/TaskForm';
+import TaskForm from './TaskForm';
 
 const EditTaskForm = (props) => {
 
@@ -55,35 +55,18 @@ const EditTaskForm = (props) => {
     }
 
     return (
-        <form>
-            <label>Description</label>
-            <input className="u-full-width" type="text" value={task.description} name="description" onChange={handleChange} />
-
-            <label>State</label>
-            <select className="u-full-width" type="text" value={task.state} name="state" onChange={handleChange}>
-            <option type="text" value="NOCOMPLETADA" onChange={handleChange}>Not completed</option>
-            <option type="text" value="COMPLETADA" name="state" onChange={handleChange}>Completed</option>
-            </select>
-
-            <label>Folder</label>
-            <select className="u-full-width" type="text" value={task.folderId} name="folderId" onChange={handleChange}>
-            <option defaultValue="" value="" onChange={handleChange} name="folderId"> - </option>
-            { props.folders.length > 0 ? (
-                props.folders.map(folder => {
-                    const {id, name} = folder;
-                    return (
-                      <option value={id} onChange={handleChange} name="folderId">{name}</option>
-                    )
-                })
-            ) : (
-                <option defaultValue="" value="" onChange={handleChange} name="folderId"> - </option>
-            )
-            }
-            </select>
-
-            <button className="button-primary" type="submit" onClick={handleSubmit} >Edit task</button>
-            <button type="submit" onClick={() => props.setEditing(false)} >Cancel</button>
-        </form>
+      <div>
+      <TaskForm
+        task={task}
+        tasks={props.tasks}
+        deleteTask={props.deleteTask}
+        editTask={props.editTask}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+      <button className="button-primary" type="submit" onClick={handleSubmit} >Edit task</button>
+      <button type="submit" onClick={() => props.setEditing(false)} >Cancel</button>
+      </div>
     )
 }
 
