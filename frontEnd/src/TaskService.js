@@ -54,10 +54,10 @@ export async function serviceAddTask(details) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: dataToRequestDetails(details)
   };
-  
+
   try {
     let response = await fetch('http://localhost:8080/task/add', requestOptions);
-    let data = await response.json();
+    let data = await response
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${data.message}`);
     } else {

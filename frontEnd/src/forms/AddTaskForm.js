@@ -1,6 +1,5 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import TaskForm from './TaskForm';
-import { serviceAddTask } from '../TaskService';
 
 const AddTaskForm = (props) => {
 
@@ -26,7 +25,7 @@ const AddTaskForm = (props) => {
         state: task.state,
         folderId: task.folderId
       };
-      serviceAddTask(details);
+      props.addTask(details);
     }
   }
 

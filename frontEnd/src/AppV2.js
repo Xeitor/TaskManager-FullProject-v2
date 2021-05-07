@@ -5,8 +5,7 @@ import AddTaskForm from './forms/AddTaskForm';
 import EditTaskForm from './forms/EditTaskForm';
 import AddFolderForm from './forms/AddFolderForm';
 import EditFolderForm from './forms/EditFolderForm';
-import { serviceGetTask, serviceDeleteTask } from './TaskService';
-import TaskForm from './forms/TaskForm';
+import { serviceGetTask, serviceDeleteTask, serviceAddTask } from './TaskService';
 var aux = null;
 
 const App = () => {
@@ -27,8 +26,12 @@ const App = () => {
     }
   }, [loadingTask]);
 
-  const addTask = (task) => {
-    setLoadingTask(true);
+  const addTask = (details) => {
+    serviceAddTask(details).then((response) => {
+      if (response) {
+        setLoadingTask(true);
+      }
+    })
     setCurrentTask(initialTask);
     //setTasksInFolser(false);
   };
