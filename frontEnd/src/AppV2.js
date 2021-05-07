@@ -56,7 +56,6 @@ const App = () => {
       }
     })
     setEditing(false);
-    setCurrentTask(initialTask);
   };
 
   const updateTasks = (data) => {
@@ -94,7 +93,7 @@ const App = () => {
         ) : (
           <div className="addTaskForm">
             <h2>Add task</h2>
-            <AddTaskForm currentTask={currentTask} addTask={addTask} folders={folders} />
+            <AddTaskForm addTask={addTask} folders={folders} />
           </div>
         )}
       </div>

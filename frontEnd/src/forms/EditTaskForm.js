@@ -3,6 +3,8 @@ import TaskForm from './TaskForm';
 
 const EditTaskForm = (props) => {
 
+    const initTask = {id: null, description: '', state: '', folderName: '', folderId:''};
+    
     const [task, setTask] = useState(props.currentTask);
 
     const handleChange = e => {
@@ -19,6 +21,7 @@ const EditTaskForm = (props) => {
       };
       e.preventDefault();
       props.updateTask(details, task.id);
+      setTask(initTask);
     }
 
     return (

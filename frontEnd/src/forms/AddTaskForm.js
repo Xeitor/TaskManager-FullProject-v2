@@ -5,7 +5,7 @@ const AddTaskForm = (props) => {
 
   const initTask = {id: null, description: '', state: '', folderName: '', folderId:''};
 
-  const [task, setTask] = useState(props.currentTask);
+  const [task, setTask] = useState(initTask);
 
   const handleChange = e => {
     const {name, value} = e.target;
