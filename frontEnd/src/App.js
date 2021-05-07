@@ -146,7 +146,7 @@ const App = () => {
     const requestOptions = {
       method: 'DELETE'
     };
-    
+
     fetch('http://localhost:8080/task/' + id, requestOptions)
     .then(async response => {
       const isJson = response.headers.get('content-type')?.includes('application/json');
@@ -227,7 +227,7 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className="small-container">
       <h1>Task manager app</h1>
       <div className="row">
   <div className="five columns">

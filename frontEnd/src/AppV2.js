@@ -12,10 +12,10 @@ var aux = null;
 const App = () => {
 
   // Tasks
-  const [editing, setEditing] = useState(false);
   const initialTask = { id: null, description: "", state: "" };
+
+  const [editing, setEditing] = useState(false);
   const [currentTask, setCurrentTask] = useState(initialTask);
-  const [folders, setFolders] = useState([]);
 
   const [tasks, setTasks] = useState({});
   const [loadingTask, setLoadingTask] = useState(true);
@@ -68,7 +68,13 @@ const App = () => {
 
   // folders
 
+  const [folders, setFolders] = useState([]);
+
+
+
   return (
+    <div className="container">
+      <h1>Task manager app</h1>
     <div class="rootDiv">
       <div class="tasks">
       <div className="editTaskForm">
@@ -85,7 +91,7 @@ const App = () => {
         ) : (
           <div className="addTaskForm">
             <h2>Add task</h2>
-            <AddTaskForm addTask={addTask} folders={folders} />
+            <AddTaskForm task={currentTask} addTask={addTask} folders={folders} />
           </div>
         )}
       </div>
@@ -100,6 +106,7 @@ const App = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

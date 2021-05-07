@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import TaskForm from './TaskForm';
+import { serviceAddTask } from '../TaskService';
 
 const AddTaskForm = (props) => {
 
@@ -17,7 +18,7 @@ const AddTaskForm = (props) => {
     if (!task.folderId) {
       task.folderId = ''
     }
-    if (!task.state) {task.state = 'NOCOMPLETADA'};
+    if (!task.state) {task.state = 'NOCOMPLETADA'}; //comentar posiblemente
     if (task.description) {
       //  handleChange(e, props.addTask(task));
       var details = {
@@ -25,43 +26,7 @@ const AddTaskForm = (props) => {
         state: task.state,
         folderId: task.folderId
       };
-
-      var formBody = [];
-      for (var property in details) {
-        var encodedKey = encodeURIComponent(property);
-        var encodedValue = encodeURIComponent(details[property]);
-        formBody.push(encodedKey + "=" + encodedValue);
-      }
-      formBody = formBody.join("&");
-      e.preventDefault();
-
-      const requestOptions = {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formBody
-      };
-
-      fetch('http://localhost:8080/task/add', requestOptions)
-      .then(response => {
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-        var data = response;
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = (data && data.message) || response.status;
-          return Promise.reject(error);
-        } else {
-          //var obj = JSON.parse(data);
-          console.log("should add task");
-          props.addTask(task);
-        }
-      })
-      .catch(error => {
-        //this.setState({ errorMessage: error.toString() });
-        console.error('There was an error!', error);
-      });
-      setTask(initTask);
+      serviceAddTask(details);
     }
   }
 
