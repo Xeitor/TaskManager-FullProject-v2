@@ -10,16 +10,12 @@ var aux = null;
 const App = () => {
   // Refactoring
 
+  const [dataTasksV2, loadingTasksV2] = useState(true);
+  //const [dataFolders, loadingFolders] = useState(true);
 
-
-
-
-
-
-
-
-
-
+  // useState returns a pair: the current state value and a function that lets you update it.
+  const [tasksV2, setTasksV2] = useState([]);
+  //const [folders, setFolders] = useState([]);
 
   // Old code
   const requestOptionsGet = {
@@ -96,25 +92,6 @@ const App = () => {
   const useAsyncRequestTask = amount => {
       const [data, setData] = useState(null);
       const [loading, setLoading] = useState(false);
-
-      useEffect(() => {
-          const fetchData = async () => {
-              try {
-                  setLoading(true);
-                  const response = await fetch(`http://localhost:8080/task/all`, requestOptionsGet);
-                  const json = await response.json();
-                  setData(json, setLoading(false));
-              } catch (err) {
-                  console.warn("Something went wrong fetching the API...", err);
-                  setLoading(false);
-              }
-          }
-
-          if (amount) {
-           fetchData(amount);
-          }
-      }, [amount]);
-
       return [data, loading]
   }
   const test = 1;
