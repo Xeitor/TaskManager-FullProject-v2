@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import TaskForm from './forms/TaskForm';
 
 const EditTaskForm = (props) => {
 

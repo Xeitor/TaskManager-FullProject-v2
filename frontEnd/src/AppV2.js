@@ -29,7 +29,9 @@ const App = () => {
 
   const deleteTask = (id) => {
     serviceDeleteTask(id).then((response) => {
-      setTasks(tasks.filter((task) => task.id !== id));
+      if (response) {
+        setTasks(tasks.filter((task) => task.id !== id));
+      }
     })
   };
 
@@ -59,20 +61,38 @@ const App = () => {
     setTasks(formattedTasks);
   }
   return (
-    <>
-      { loadingTask ? (
-        <div>Loading tasks...</div>
-      ) : (
-        <div>
-          <br />
-          <TaskTable
-            tasks={tasks}
-            deleteTask={deleteTask}
-            editTask={editTask}
-          />
-        </div>
-      )}
-    </>
+    <div class="rootDiv">
+      <div class="tasks">
+      <div className="editTaskForm">
+        { editing ? (
+          <div class="editTaskForm">
+            <h2>Edit task</h2>
+            <EditTaskForm
+              currentTask={currentTask}
+              setEditing={setEditing}
+              updateTask={updateTask}
+              folders={folders}
+            />
+          </div>
+        ) : (
+          <div className="addTaskForm">
+            <h2>Add task</h2>
+            <AddTaskForm addTask={addTask} folders={folders} />
+          </div>
+        )}
+      </div>
+        { loadingTask ? (
+          <div>Loading tasks...</div>
+        ) : (
+          <div class="taskTable">
+            <TaskTable
+              tasks={tasks}
+              deleteTask={deleteTask}
+              editTask={editTask}/>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

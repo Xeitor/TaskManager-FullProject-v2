@@ -6,18 +6,14 @@ const requestOptionsGet = {
     'API-Key': 'secret'
   }
 };
-const requestOptionsDelete = {
-  method: 'DELETE'
-};
-
 export async function serviceGetTask() {
   try {
-      const response = await fetch(`http://localhost:8080/taaask/all`, requestOptionsGet);
+      const response = await fetch(`http://localhost:8080/task/all`, requestOptionsGet);
+      let data = await response.json();
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${data.message}`);
       } else {
-        const json = response.json();
-        return json
+        return data
       }
   } catch (err) {
       console.warn("Something went wrong fetching the API...", err);
@@ -27,18 +23,16 @@ export async function serviceGetTask() {
 
 export async function serviceDeleteTask(id) {
   try {
-    let response = await fetch('http://localhost:8080/task/' + id, requestOptionsDelete);
+    let response = await fetch('http://localhost:8080/task/' + id, {
+      method: 'DELETE',
+    });
+    let data = await response.json();
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${data.message}`);
     } else {
       return true
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.warn("Something went wrong fetching the API...", err);
   }
 };
-
-export function getTaskSync() {
-  return fetch(`http://localhost:8080/task/all`, requestOptionsGet)
-    .then(data => data.json())
-}
