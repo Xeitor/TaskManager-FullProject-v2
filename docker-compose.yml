@@ -27,8 +27,8 @@ services:
       - DATABASE_NAME=TaskManagerDb
       - DATABASE_PORT=3306
   # Frontend Service
-  task-manager-frontend:
-    image: task-manager-react:latest
-    ports:
-      - "3000:3000"
-    restart: always
+  #task-manager-frontend:
+  #  image: task-manager-react:latest
+  #  ports:
+  #    - "3000:3000"
+  #  restart: always
