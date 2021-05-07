@@ -3,8 +3,6 @@ import TaskForm from './TaskForm';
 
 const EditTaskForm = (props) => {
 
-    const initTask = {id: null, description: '', state: '', folderName: '', folderId:''};
-    
     const [task, setTask] = useState(props.currentTask);
 
     const handleChange = e => {
@@ -13,15 +11,17 @@ const EditTaskForm = (props) => {
     }
 
     const handleSubmit = e => {
-      if (!task.folderId) {task.folderId = ''};
-      var details = {
-        description: task.description,
-        state: task.state,
-        folderId: task.folderId
-      };
       e.preventDefault();
-      props.updateTask(details, task.id);
-      setTask(initTask);
+      if (props.currentTask != task) {
+        if (!task.folderId) {task.folderId = ''};
+        var details = {
+          description: task.description,
+          state: task.state,
+          folderId: task.folderId
+        };
+        console.log("made the request");
+        props.updateTask(details, task.id);
+      }
     }
 
     return (

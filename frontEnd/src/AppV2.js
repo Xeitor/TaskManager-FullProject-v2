@@ -31,8 +31,6 @@ const App = () => {
         setLoadingTask(true);
       }
     })
-    console.log("should update initial task");
-    setCurrentTask(initialTask);
     //setTasksInFolser(false);
   };
 
