@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import taskList from './data.js';
-import folderList from './dataFolder.js';
 import TaskTable from './tables/TaskTable';
 import FolderTable from './tables/FolderTable';
 import AddTaskForm from './forms/AddTaskForm';
@@ -110,8 +108,8 @@ const App = () => {
   var [dataFolders, loadingFolders] = useAsyncRequestFolder(test);
   // Fixed array of users:
   // const [users, setUsers] = userList;
-  var [tasks, setTasks] = useState(taskList);
-  var [folders, setFolders] = useState(folderList);
+  var [tasks, setTasks] = useState([]);
+  var [folders, setFolders] = useState([]);
 
   useEffect(() => {
     if (dataTasks) {
@@ -141,9 +139,6 @@ const App = () => {
       setFolders(formattedFolders);
     }
   }, [dataFolders]);
-
-
-  //const [tasks, setTasks] = useState(taskList);
 
   const addTask = (task) => {
     reFetchTasks();
