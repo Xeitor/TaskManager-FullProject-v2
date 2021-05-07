@@ -146,6 +146,7 @@ const App = () => {
     const requestOptions = {
       method: 'DELETE'
     };
+    
     fetch('http://localhost:8080/task/' + id, requestOptions)
     .then(async response => {
       const isJson = response.headers.get('content-type')?.includes('application/json');

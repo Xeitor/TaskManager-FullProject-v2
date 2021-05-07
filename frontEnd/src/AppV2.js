@@ -28,12 +28,8 @@ const App = () => {
   };
 
   const deleteTask = (id) => {
-    serviceDeleteTask(id).then((status) => {
-      if (status) {
-        setTasks(tasks.filter((task) => task.id !== id));
-      } else {
-          //error
-      }
+    serviceDeleteTask(id).then((response) => {
+      setTasks(tasks.filter((task) => task.id !== id));
     })
   };
 

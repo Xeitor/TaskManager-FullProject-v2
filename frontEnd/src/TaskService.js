@@ -9,11 +9,16 @@ const requestOptionsGet = {
 const requestOptionsDelete = {
   method: 'DELETE'
 };
+
 export async function serviceGetTask() {
   try {
-      const response = await fetch(`http://localhost:8080/task/all`, requestOptionsGet);
-      const json = await response.clone().json();
-      return json
+      const response = await fetch(`http://localhost:8080/taaask/all`, requestOptionsGet);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const json = response.json();
+        return json
+      }
   } catch (err) {
       console.warn("Something went wrong fetching the API...", err);
       return []
@@ -22,12 +27,14 @@ export async function serviceGetTask() {
 
 export async function serviceDeleteTask(id) {
   try {
-      const response = await fetch('http://localhost:8080/task/' + id, requestOptionsDelete)
-      const responseStatus = await response.clone().status;
-      return responseStatus
-  } catch (err) {
-      console.warn("Error deliting task", err);
-      return false
+    let response = await fetch('http://localhost:8080/task/' + id, requestOptionsDelete);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      return true
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 
