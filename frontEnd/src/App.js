@@ -8,6 +8,20 @@ import EditFolderForm from './forms/EditFolderForm';
 var aux = null;
 
 const App = () => {
+  // Refactoring
+
+
+
+
+
+
+
+
+
+
+
+
+  // Old code
   const requestOptionsGet = {
     method: 'GET',
     mode: 'cors',
