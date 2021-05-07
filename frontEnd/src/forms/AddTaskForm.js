@@ -5,7 +5,7 @@ const AddTaskForm = (props) => {
 
   const initTask = {id: null, description: '', state: '', folderName: '', folderId:''};
 
-  const [task, setTask] = useState(initTask);
+  const [task, setTask] = useState(props.currentTask);
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -26,6 +26,7 @@ const AddTaskForm = (props) => {
         folderId: task.folderId
       };
       props.addTask(details);
+      setTask(initTask);
     }
   }
 
@@ -33,9 +34,6 @@ const AddTaskForm = (props) => {
     <div>
     <TaskForm
       task={task}
-      tasks={props.tasks}
-      deleteTask={props.deleteTask}
-      editTask={props.editTask}
       handleChange={handleChange}
     />
     <button className="button-primary" type="submit" onClick={handleSubmit} >Add task</button>

@@ -67,3 +67,23 @@ export async function serviceAddTask(details) {
     console.warn("Something went wrong fetching the API...", err);
   }
 };
+
+export async function serviceUpdateTask(details, id) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: dataToRequestDetails(details)
+  };
+
+  try {
+    let response = await fetch('http://localhost:8080/task/' + id, requestOptions);
+    let data = await response.json()
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${data.message}`);
+    } else {
+      return true
+    }
+  } catch (err) {
+    console.warn("Something went wrong fetching the API...", err);
+  }
+};

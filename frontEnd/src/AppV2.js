@@ -5,11 +5,10 @@ import AddTaskForm from './forms/AddTaskForm';
 import EditTaskForm from './forms/EditTaskForm';
 import AddFolderForm from './forms/AddFolderForm';
 import EditFolderForm from './forms/EditFolderForm';
-import { serviceGetTask, serviceDeleteTask, serviceAddTask } from './TaskService';
+import { serviceGetTask, serviceDeleteTask, serviceAddTask, serviceUpdateTask } from './TaskService';
 var aux = null;
 
 const App = () => {
-
   // Tasks
   const initialTask = { id: null, description: "", state: "" };
 
@@ -32,6 +31,7 @@ const App = () => {
         setLoadingTask(true);
       }
     })
+    console.log("should update initial task");
     setCurrentTask(initialTask);
     //setTasksInFolser(false);
   };
@@ -49,11 +49,14 @@ const App = () => {
     setCurrentTask(task);
   };
 
-  const updateTask = (newTask) => {
-    setLoadingTask(true);
-    setCurrentTask(initialTask);
+  const updateTask = (details, id) => {
+    serviceUpdateTask(details, id).then((response) => {
+      if (response) {
+        setLoadingTask(true);
+      }
+    })
     setEditing(false);
-    //setTaskssInFolser(false);
+    setCurrentTask(initialTask);
   };
 
   const updateTasks = (data) => {
@@ -72,9 +75,6 @@ const App = () => {
   // folders
 
   const [folders, setFolders] = useState([]);
-
-
-
   return (
     <div className="container">
       <h1>Task manager app</h1>
@@ -94,7 +94,7 @@ const App = () => {
         ) : (
           <div className="addTaskForm">
             <h2>Add task</h2>
-            <AddTaskForm task={currentTask} addTask={addTask} folders={folders} />
+            <AddTaskForm currentTask={currentTask} addTask={addTask} folders={folders} />
           </div>
         )}
       </div>
