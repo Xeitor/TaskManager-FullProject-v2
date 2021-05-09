@@ -13,9 +13,9 @@ const TasksComponent = (props) => {
   const [loadingTask, setLoadingTask] = useState(true);
 
   const addTask = (details) => {
-    sAddTask(details).then((response) => {
-      if (response) {
-        props.setLoadingTask(true);
+    sAddTask(details).then((task) => {
+      if (task) {
+        props.setTasks([...props.tasks, task])
       }
     })
     //setTasksInFolser(false);
@@ -35,14 +35,15 @@ const TasksComponent = (props) => {
   };
 
   const updateTask = (details, id) => {
-    sUpdateTask(id, details).then((response) => {
-      if (response) {
-        console.log("should be executing");
-        props.setLoadingTask(true);
+    sUpdateTask(id, details).then((newTask) => {
+      if (newTask) {
+        props.setTasks(props.tasks.map(task => (task.id === newTask.id ? newTask : task)))
       }
     })
     setEditing(false);
   };
+
+
 
   return (
     <div class="tasks">

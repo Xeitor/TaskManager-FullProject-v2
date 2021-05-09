@@ -64,7 +64,7 @@ export async function serviceAdd(url, details) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${data.message}`);
     } else {
-      return true
+      return data
     }
   } catch (err) {
     console.warn("Something went wrong fetching the API...", err);
@@ -84,7 +84,7 @@ export async function serviceUpdate(url, details, id) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${data.message}`);
     } else {
-      return true
+      return data
     }
   } catch (err) {
     console.warn("Something went wrong fetching the API...", err);
