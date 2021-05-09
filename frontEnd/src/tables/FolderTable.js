@@ -21,7 +21,7 @@ const FolderTable = (props) => {
                                 <td>
                                     <button class="buttonDelete" onClick={() => props.deleteFolder(id)}>Delete</button>
                                     <button class="buttonEdit" onClick={() => props.editFolder(id, folder)}>Edit</button>
-                                    <button onClick={() => props.showTasksInFolder(id, name)} >Show Tasks</button>
+                                    <button onClick={() => props.setTasksInFolder(id)} >Show Tasks</button>
                                 </td>
                             </tr>
                         )

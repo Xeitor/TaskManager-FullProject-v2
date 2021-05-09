@@ -64,6 +64,7 @@ const FoldersComponent = (props) => {
        ) : (
        <div class="taskTable">
           <FolderTable
+             setTasksInFolder={props.setTasksInFolder}
              folders={props.folders}
              deleteFolder={deleteFolder}
              editFolder={editFolder}/>

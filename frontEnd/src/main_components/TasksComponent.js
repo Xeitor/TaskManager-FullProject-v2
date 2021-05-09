@@ -43,8 +43,6 @@ const TasksComponent = (props) => {
     setEditing(false);
   };
 
-
-
   return (
     <div class="tasks">
       <div class="editTaskForm">
@@ -65,10 +63,19 @@ const TasksComponent = (props) => {
        <div>Loading tasks...</div>
        ) : (
        <div class="taskTable">
+       { props.tasksInFolder ? (
+         <div>
+            <h2>Tasks in #FolderName</h2>
+            <button onClick={() => props.setTasksInFolder(false)} > Show all tasks</button>
+         </div>
+       ): (
+         <h2>Tasks list</h2>
+       )}
           <TaskTable
-             tasks={props.tasks}
-             deleteTask={deleteTask}
-             editTask={editTask}/>
+            tasksInFolder={props.tasksInFolder}
+            tasks={props.tasks}
+            deleteTask={deleteTask}
+            editTask={editTask}/>
        </div>
        )}
     </div>
