@@ -10,12 +10,7 @@ const TasksComponent = (props) => {
   const [editing, setEditing] = useState(false);
   const [currentTask, setCurrentTask] = useState(initialTask);
 
-  const [tasks, setTasks] = useState({});
   const [loadingTask, setLoadingTask] = useState(true);
-
-  useEffect(() => {
-    setTasks(props.tasks);
-  }, [props.tasks]);
 
   const addTask = (details) => {
     serviceAddTask(details).then((response) => {
@@ -29,7 +24,7 @@ const TasksComponent = (props) => {
   const deleteTask = (id) => {
     serviceDeleteTask(id).then((response) => {
       if (response) {
-        setTasks(tasks.filter((task) => task.id !== id));
+        props.setTasks(props.tasks.filter((task) => task.id !== id));
       }
     })
   };
@@ -69,7 +64,7 @@ const TasksComponent = (props) => {
        ) : (
        <div class="taskTable">
           <TaskTable
-             tasks={tasks}
+             tasks={props.tasks}
              deleteTask={deleteTask}
              editTask={editTask}/>
        </div>
