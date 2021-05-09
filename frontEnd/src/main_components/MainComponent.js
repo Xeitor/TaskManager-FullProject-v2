@@ -49,11 +49,13 @@ const MainComponent = (props) => {
     });
     setTasks(formattedTasks);
   }
-  
+
   return (
     <div className="container">
       <div className="folders">
         <FoldersComponent
+          tasks={tasks}
+          setTasks={setTasks}
           folders={folders}
           setFolders={setFolders}
           setLoadingFolder={setLoadingFolder}

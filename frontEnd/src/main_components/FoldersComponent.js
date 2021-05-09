@@ -24,6 +24,7 @@ const FoldersComponent = (props) => {
     serviceDeleteFolder(id).then((response) => {
       if (response) {
         props.setFolders(props.folders.filter((folder) => folder.id !== id));
+        props.setTasks(props.tasks.filter((task) => task.folderId !== id))
       }
     })
   };
