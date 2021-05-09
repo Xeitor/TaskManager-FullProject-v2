@@ -5,7 +5,7 @@ import {  sDeleteTask, sUpdateTask, sAddTask } from '../services/TaskService';
 
 const TasksComponent = (props) => {
   // Tasks
-  const initialTask = { id: null, description: "", state: "", folderId: null, folderName: ''};
+  const initialTask = { id: null, description: "", state: "", folderId: '', folderName: ''};
 
   const [editing, setEditing] = useState(false);
   const [currentTask, setCurrentTask] = useState(initialTask);
@@ -71,7 +71,7 @@ const TasksComponent = (props) => {
        <div>Loading tasks...</div>
        ) : (
        <div class="taskTable">
-       { props.tasksInFolder ? (
+       { props.tasksInFolder[0] ? (
          <div>
             <h2>Tasks in {props.tasksInFolder[1]}</h2>
             <button onClick={() => props.setTasksInFolder([null, null])} > Show all tasks</button>
