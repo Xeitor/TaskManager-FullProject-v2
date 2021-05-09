@@ -57,6 +57,7 @@ const TasksComponent = (props) => {
           <h2>Add Task</h2>
           )}
           <TaskForm
+            folders={props.folders}
             editing={editing}
             currentTask={currentTask} //
             setEditing={setEditing} //cancel button

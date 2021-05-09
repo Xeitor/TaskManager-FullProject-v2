@@ -61,17 +61,17 @@ const TaskForm = (props) => {
     <option type="text" value="COMPLETADA" name="state" onChange={handleChange}>Completed</option>
     </select>
     <label>Folder</label>
-    <select className="u-full-width" type="text" value={task.taskId} name="taskId" onChange={handleChange}>
+    <select className="u-full-width" type="text" value={task.folderId} name="folderId" onChange={handleChange}>
     <option value="" onChange={handleChange} name="taskId"> - </option>
-    { props.tasks && props.tasks.length > 0 ? (
-        props.tasks.map(task => {
-            const {id, name} = task;
+    { props.folders && props.folders.length > 0 ? (
+        props.folders.map(folder => {
+            const {id, name} = folder;
             return (
-              <option value={id} onChange={handleChange} name="taskId">{name}</option>
+              <option value={id} onChange={handleChange} name="folderId">{name}</option>
             )
         })
     ) : (
-        <option defaultValue="" value="" onChange={handleChange} name="taskId"> - </option>
+        <option defaultValue="" value="" onChange={handleChange} name="folderId"> - </option>
     )}
     </select>
     { props.editing ? (
