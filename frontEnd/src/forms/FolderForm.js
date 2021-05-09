@@ -5,6 +5,9 @@ const FolderForm = (props) => {
   const initFolder = {id: null, name: ''};
 
   const [folder, setFolder] = useState(initFolder);
+  useEffect(() => {
+    setFolder(props.currentFolder);
+  }, [props.currentFolder]);
 
   useEffect(() => {
     if (props.editing) {

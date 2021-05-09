@@ -6,12 +6,8 @@ const TaskForm = (props) => {
   const [task, setTask] = useState(initTask);
 
   useEffect(() => {
-    if (props.editing) {
-      setTask(props.currentTask);
-    } else {
-      setTask(initTask);
-    }
-  }, [props.editing]);
+    setTask(props.currentTask);
+  }, [props.currentTask]);
 
 
   const handleChange = e => {

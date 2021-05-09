@@ -10,6 +10,12 @@ const TasksComponent = (props) => {
   const [editing, setEditing] = useState(false);
   const [currentTask, setCurrentTask] = useState(initialTask);
 
+  useEffect(() => {
+    console.log("testing hook");
+    setCurrentTask(currentTask);
+  }, [currentTask]);
+
+
   const [loadingTask, setLoadingTask] = useState(true);
 
   const addTask = (details) => {

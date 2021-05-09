@@ -10,6 +10,10 @@ const FoldersComponent = (props) => {
   const [editing, setEditing] = useState(false);
   const [currentFolder, setCurrentFolder] = useState(initialFolder);
 
+  useEffect(() => {
+    setCurrentFolder(currentFolder);
+  }, [currentFolder]);
+
   const addFolder = (details) => {
     sAddFolder(details).then((folder) => {
       if (folder) {
@@ -17,7 +21,6 @@ const FoldersComponent = (props) => {
       }
     })
     setCurrentFolder(initialFolder);
-    //setFoldersInFolser(false);
   };
 
   const updateFolder = (details, id) => {
