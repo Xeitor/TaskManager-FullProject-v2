@@ -10,22 +10,6 @@ const FoldersComponent = (props) => {
   const [editing, setEditing] = useState(false);
   const [currentFolder, setCurrentFolder] = useState(initialFolder);
 
-  const [folders, setFolders] = useState(props.folders);
-
-  useEffect(() => {
-    setFolders(props.folders);
-  }, [props.folders]);
-  /*
-  const [folders, setFolders] = useState({});
-  const [loadingFolder, setLoadingFolder] = useState(true);
-
-  useEffect(() => {
-    if (loadingFolder) {
-      serviceGetFolder().then((data) => updateFolders(data))
-      setLoadingFolder(false);
-    }
-  }, [loadingFolder]);
-  */
   const addFolder = (details) => {
     serviceAddFolder(details).then((response) => {
       if (response) {
@@ -39,7 +23,7 @@ const FoldersComponent = (props) => {
   const deleteFolder = (id) => {
     serviceDeleteFolder(id).then((response) => {
       if (response) {
-        setFolders(folders.filter((folder) => folder.id !== id));
+        props.setFolders(props.folders.filter((folder) => folder.id !== id));
       }
     })
   };
@@ -79,7 +63,7 @@ const FoldersComponent = (props) => {
        ) : (
        <div class="taskTable">
           <FolderTable
-             folders={folders}
+             folders={props.folders}
              deleteFolder={deleteFolder}
              editFolder={editFolder}/>
        </div>
