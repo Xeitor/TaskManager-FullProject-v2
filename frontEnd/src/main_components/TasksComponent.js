@@ -14,16 +14,13 @@ const TasksComponent = (props) => {
   const [loadingTask, setLoadingTask] = useState(true);
 
   useEffect(() => {
-    if (loadingTask) {
-      serviceGetTask().then((data) => updateTasks(data))
-      setLoadingTask(false);
-    }
-  }, [loadingTask]);
+    setTasks(props.tasks);
+  }, [props.tasks]);
 
   const addTask = (details) => {
     serviceAddTask(details).then((response) => {
       if (response) {
-        setLoadingTask(true);
+        props.setLoadingTask(true);
       }
     })
     //setTasksInFolser(false);
@@ -45,24 +42,11 @@ const TasksComponent = (props) => {
   const updateTask = (details, id) => {
     serviceUpdateTask(details, id).then((response) => {
       if (response) {
-        setLoadingTask(true);
+        props.setLoadingTask(true);
       }
     })
     setEditing(false);
   };
-
-  const updateTasks = (data) => {
-    const formattedTasks = data.map((obj, i) => {
-      return {
-        id: obj.id,
-        description: obj.description ,
-        state: obj.state || '',
-        folderName: obj.folderName || '',
-        folderId: obj.folderId || ''
-      };
-    });
-    setTasks(formattedTasks);
-  }
 
   return (
     <div class="tasks">
@@ -79,7 +63,7 @@ const TasksComponent = (props) => {
             updateTask={updateTask} // update task (uses service and updates gui)
             addTask={addTask}/>
           </div>
-       { loadingTask ? (
+       { props.loadingTask ? (
        <div>Loading tasks...</div>
        ) : (
        <div class="taskTable">

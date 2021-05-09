@@ -60,6 +60,20 @@ const TaskForm = (props) => {
     <option type="text" value="NOCOMPLETADA" onChange={handleChange}>Not completed</option>
     <option type="text" value="COMPLETADA" name="state" onChange={handleChange}>Completed</option>
     </select>
+    <label>Folder</label>
+    <select className="u-full-width" type="text" value={task.taskId} name="taskId" onChange={handleChange}>
+    <option value="" onChange={handleChange} name="taskId"> - </option>
+    { props.tasks && props.tasks.length > 0 ? (
+        props.tasks.map(task => {
+            const {id, name} = task;
+            return (
+              <option value={id} onChange={handleChange} name="taskId">{name}</option>
+            )
+        })
+    ) : (
+        <option defaultValue="" value="" onChange={handleChange} name="taskId"> - </option>
+    )}
+    </select>
     { props.editing ? (
       <div>
         <button className="button-primary" type="submit" onClick={handleSubmitUpdate} >Edit Task</button>

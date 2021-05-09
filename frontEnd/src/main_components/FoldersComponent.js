@@ -10,6 +10,12 @@ const FoldersComponent = (props) => {
   const [editing, setEditing] = useState(false);
   const [currentFolder, setCurrentFolder] = useState(initialFolder);
 
+  const [folders, setFolders] = useState(props.folders);
+
+  useEffect(() => {
+    setFolders(props.folders);
+  }, [props.folders]);
+  /*
   const [folders, setFolders] = useState({});
   const [loadingFolder, setLoadingFolder] = useState(true);
 
@@ -19,11 +25,11 @@ const FoldersComponent = (props) => {
       setLoadingFolder(false);
     }
   }, [loadingFolder]);
-
+  */
   const addFolder = (details) => {
     serviceAddFolder(details).then((response) => {
       if (response) {
-        setLoadingFolder(true);
+        props.setLoadingFolder(true);
       }
     })
     setCurrentFolder(initialFolder);
@@ -46,22 +52,12 @@ const FoldersComponent = (props) => {
   const updateFolder = (details, id) => {
     serviceUpdateFolder(details, id).then((response) => {
       if (response) {
-        setLoadingFolder(true);
+        props.setLoadingFolder(true);
       }
     })
     setCurrentFolder(initialFolder);
     setEditing(false);
   };
-
-  const updateFolders = (data) => {
-    const formattedFolders = data.map((obj, i) => {
-      return {
-        id: obj.id,
-        name: obj.name
-      };
-    });
-    setFolders(formattedFolders);
-  }
 
   return (
     <div class="tasks">
@@ -78,7 +74,7 @@ const FoldersComponent = (props) => {
             updateFolder={updateFolder} // update folder (uses service and updates gui)
             addFolder={addFolder}/>
           </div>
-       { loadingFolder ? (
+       { props.loadingFolder ? (
        <div>Loading folders...</div>
        ) : (
        <div class="taskTable">
