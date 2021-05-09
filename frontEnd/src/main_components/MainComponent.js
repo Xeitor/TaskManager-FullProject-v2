@@ -11,20 +11,10 @@ const MainComponent = (props) => {
 
   useEffect(() => {
     if (loadingFolder) {
-      serviceGetFolder().then((data) => updateFolders(data))
+      serviceGetFolder().then((data) => setFolders(data))
       setLoadingFolder(false);
     }
   }, [loadingFolder]);
-
-  const updateFolders = (data) => {
-    const formattedFolders = data.map((obj, i) => {
-      return {
-        id: obj.id,
-        name: obj.name
-      };
-    });
-    setFolders(formattedFolders);
-  }
 
   // Tasks
   const [tasks, setTasks] = useState({});
@@ -32,23 +22,10 @@ const MainComponent = (props) => {
 
   useEffect(() => {
     if (loadingTask) {
-      serviceGetTask().then((data) => updateTasks(data))
+      serviceGetTask().then((data) => setTasks(data))
       setLoadingTask(false);
     }
   }, [loadingTask]);
-
-  const updateTasks = (data) => {
-    const formattedTasks = data.map((obj, i) => {
-      return {
-        id: obj.id,
-        description: obj.description ,
-        state: obj.state || '',
-        folderName: obj.folderName || '',
-        folderId: obj.folderId || ''
-      };
-    });
-    setTasks(formattedTasks);
-  }
 
   return (
     <div className="container">
