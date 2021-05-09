@@ -25,12 +25,11 @@ public class FolderController {
 
     // crear carpeta
     @PostMapping(path = "/folder/add")
-    public @ResponseBody
-    String addNewFolder(@RequestParam String name) {
-        Folder n = new Folder();
-        n.setName(name);
-        folderRepository.save(n);
-        return "Carpeta guardada";
+    public ResponseEntity<FolderDTO> addNewFolder(@RequestParam String name) {
+        Folder folder = new Folder();
+        folder.setName(name);
+        folder = folderRepository.save(folder);
+        return ResponseEntity.ok(new FolderDTO(folder));
     }
 
     @PatchMapping(path = "/folder/{id}")
@@ -45,30 +44,29 @@ public class FolderController {
 
     // traer todos las carpetas
     @GetMapping(path = "/folder/all")
-    public @ResponseBody
-    Iterable<Folder> getAllFolders() {
-        return folderRepository.findAll();
+    public @ResponseBody Iterable<FolderDTO> getAllFolders() {
+        return FolderDTO.createFolderDtoList(FolderDTO.makeCollection(folderRepository.findAll()));
     }
 
     // borrar carpeta y tareas asociadas
     @DeleteMapping("/folder/{id}")
-    public ResponseEntity<Folder> deleteFolder(@PathVariable Integer id) {
+    public ResponseEntity<FolderDTO> deleteFolder(@PathVariable Integer id) {
         Folder folder = folderRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró una carpeta con el id " + id));
 
         folderRepository.deleteTasksInFolder(id);
         folderRepository.delete(folder);
-        return ResponseEntity.ok(folder);
+        return ResponseEntity.ok(new FolderDTO(folder));
     }
 
     // traer folder con id
     @GetMapping("/folder/{id}")
-    public ResponseEntity<Folder> getFolderById(@PathVariable(value = "id") Integer folderId) throws ResourceNotFoundException {
+    public ResponseEntity<FolderDTO> getFolderById(@PathVariable(value = "id") Integer folderId) throws ResourceNotFoundException {
         Folder folder = folderRepository
                 .findById(folderId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró un folder con id:" + folderId));
-        return ResponseEntity.ok().body(folder);
+        return ResponseEntity.ok().body(new FolderDTO(folder));
     }
 
     // mostrar tareas en folder con id=

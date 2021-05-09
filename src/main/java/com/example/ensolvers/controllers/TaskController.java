@@ -73,7 +73,7 @@ public class TaskController {
         }
         if (description != null && !description.isEmpty()) task.setDescription(description);
         if (state != null) task.setState(state);
-        taskRepository.save(task);
+        task = taskRepository.save(task);
         return ResponseEntity.ok(new TaskDTO(task));
     }
 
