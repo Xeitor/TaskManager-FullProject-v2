@@ -11,9 +11,9 @@ const FoldersComponent = (props) => {
   const [currentFolder, setCurrentFolder] = useState(initialFolder);
 
   const addFolder = (details) => {
-    sAddFolder(details).then((response) => {
-      if (response) {
-        props.setLoadingFolder(true);
+    sAddFolder(details).then((folder) => {
+      if (folder) {
+        props.setFolders([...props.folders, folder])
       }
     })
     setCurrentFolder(initialFolder);
@@ -21,10 +21,9 @@ const FoldersComponent = (props) => {
   };
 
   const updateFolder = (details, id) => {
-    sUpdateFolder(id, details).then((response) => {
-      if (response) {
-        console.log("should be executing");
-        props.setLoadingFolder(true);
+    sUpdateFolder(id, details).then((newFolder) => {
+      if (newFolder) {
+        props.setFolders(props.folders.map(folder => (folder.id === newFolder.id ? newFolder : folder)))
       }
     })
     setCurrentFolder(initialFolder);
