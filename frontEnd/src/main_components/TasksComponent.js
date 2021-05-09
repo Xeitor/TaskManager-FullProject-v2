@@ -18,7 +18,6 @@ const TasksComponent = (props) => {
         props.setTasks([...props.tasks, task])
       }
     })
-    //setTasksInFolser(false);
   };
 
   const deleteTask = (id) => {
@@ -43,6 +42,16 @@ const TasksComponent = (props) => {
     setEditing(false);
   };
 
+  // Show tasks in folder logic
+  const [tasks, setTasks] = useState(props.tasks);
+  useEffect(() => {
+     if (props.tasksInFolder[0]) {
+       setTasks(props.tasks.filter((task) => task.folderId == props.tasksInFolder[0]));
+     } else {
+       setTasks(props.tasks);
+     }
+   }, [props.tasksInFolder, props.tasks]);
+
   return (
     <div class="tasks">
       <div class="editTaskForm">
@@ -65,15 +74,14 @@ const TasksComponent = (props) => {
        <div class="taskTable">
        { props.tasksInFolder ? (
          <div>
-            <h2>Tasks in #FolderName</h2>
-            <button onClick={() => props.setTasksInFolder(false)} > Show all tasks</button>
+            <h2>Tasks in {props.tasksInFolder[1]}</h2>
+            <button onClick={() => props.setTasksInFolder([null, null])} > Show all tasks</button>
          </div>
        ): (
          <h2>Tasks list</h2>
        )}
           <TaskTable
-            tasksInFolder={props.tasksInFolder}
-            tasks={props.tasks}
+            tasks={tasks}
             deleteTask={deleteTask}
             editTask={editTask}/>
        </div>

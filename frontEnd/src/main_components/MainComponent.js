@@ -3,7 +3,7 @@ import FoldersComponent from './FoldersComponent';
 import TasksComponent from './TasksComponent';
 import {  getAllTasks } from '../services/TaskService';
 import {  getAllFolders } from '../services/FolderService';
-var aux = null
+
 const MainComponent = (props) => {
   // Folders
   const [folders, setFolders] = useState({});
@@ -28,9 +28,10 @@ const MainComponent = (props) => {
   }, [loadingTask]);
 
   // Show tasks in folder hook
-  const [tasksInFolder, setTasksInFolder] = useState(null);
+
+  const [tasksInFolder, setTasksInFolder] = useState([null, null]);
   useEffect(() => {
-    setTasksInFolder(null);
+    setTasksInFolder([null, null]);
   }, [tasks, folders]);
 
   return (

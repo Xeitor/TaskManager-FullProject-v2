@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 const TaskTable = (props) => {
-
-    const [tasks, setTasks] = useState(props.tasks);
-    useEffect(() => {
-       if (props.tasksInFolder) {
-         setTasks(props.tasks.filter((task) => task.folderId == props.tasksInFolder));
-       } else {
-         setTasks(props.tasks);
-       }
-     }, [props.tasksInFolder, props.tasks]);
-
     return (
         <table>
             <thead>
@@ -23,8 +13,8 @@ const TaskTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                { tasks.length > 0 ? (
-                    tasks.map(task => {
+                { props.tasks.length > 0 ? (
+                    props.tasks.map(task => {
                         const {id, description, state, folderName, folderId} = task;
                         return (
                             <tr key={id}>
