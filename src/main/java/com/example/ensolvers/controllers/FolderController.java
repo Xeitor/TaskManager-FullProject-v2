@@ -1,8 +1,9 @@
 package com.example.ensolvers.controllers;
 
+import com.example.ensolvers.dtos.FolderDTO;
 import com.example.ensolvers.models.Folder;
 import com.example.ensolvers.models.Task;
-import com.example.ensolvers.models.TaskDTO;
+import com.example.ensolvers.dtos.TaskDTO;
 import com.example.ensolvers.repositories.FolderRepository;
 import com.example.ensolvers.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,13 +34,13 @@ public class FolderController {
     }
 
     @PatchMapping(path = "/folder/{id}")
-    public @ResponseBody String updateFolder(@PathVariable Integer id, @RequestParam String name) {
+    public ResponseEntity<FolderDTO> updateFolder(@PathVariable Integer id, @RequestParam String name) {
         Folder folder = folderRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró una carpeta con el id " + id));
         folder.setName(name);
         folderRepository.save(folder);
-        return "Carpeta actualizada";
+        return ResponseEntity.ok(new FolderDTO(folder));
     }
 
     // traer todos las carpetas

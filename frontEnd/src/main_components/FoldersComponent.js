@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import FolderForm from '../forms/FolderForm';
 import FolderTable from '../tables/FolderTable';
-import { serviceGetFolder, serviceDeleteFolder, serviceAddFolder, serviceUpdateFolder } from '../services/FolderService';
+import {  sDeleteFolder, sUpdateFolder, sAddFolder } from '../services/FolderService';
 
 const FoldersComponent = (props) => {
 
@@ -11,7 +11,7 @@ const FoldersComponent = (props) => {
   const [currentFolder, setCurrentFolder] = useState(initialFolder);
 
   const addFolder = (details) => {
-    serviceAddFolder(details).then((response) => {
+    sAddFolder(details).then((response) => {
       if (response) {
         props.setLoadingFolder(true);
       }
@@ -21,8 +21,9 @@ const FoldersComponent = (props) => {
   };
 
   const updateFolder = (details, id) => {
-    serviceUpdateFolder(details, id).then((response) => {
+    sUpdateFolder(id, details).then((response) => {
       if (response) {
+        console.log("should be executing");
         props.setLoadingFolder(true);
       }
     })
@@ -31,7 +32,7 @@ const FoldersComponent = (props) => {
   };
 
   const deleteFolder = (id) => {
-    serviceDeleteFolder(id).then((response) => {
+    sDeleteFolder(id).then((response) => {
       if (response) {
         props.setFolders(props.folders.filter((folder) => folder.id !== id));
         props.setTasks(props.tasks.filter((task) => task.folderId !== id))

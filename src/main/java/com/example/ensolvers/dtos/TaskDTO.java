@@ -1,7 +1,8 @@
-package com.example.ensolvers.models;
+package com.example.ensolvers.dtos;
+
+import com.example.ensolvers.models.Task;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class TaskDTO {

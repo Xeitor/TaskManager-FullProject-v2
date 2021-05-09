@@ -1,89 +1,23 @@
-const requestOptionsGet = {
-  method: 'GET',
-  mode: 'cors',
-  headers: {
-    'Content-Type': 'application/json',
-    'API-Key': 'secret'
-  }
-};
-function dataToRequestDetails(details){
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
-  return formBody
-}
-export async function serviceGetFolder() {
-  try {
-      const response = await fetch(`http://localhost:8080/folder/all`, requestOptionsGet);
-      let data = await response.json();
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${data.message}`);
-      } else {
-        return data
-      }
-  } catch (err) {
-      console.warn("Something went wrong fetching the API...", err);
-      return []
-  }
+import { serviceGetAll, serviceDelete, serviceAdd, serviceUpdate } from './GenericService';
+
+const FOLDER_PATH = 'http://localhost:8080/folder/';
+
+export async function getAllFolders() {
+  var response = await serviceGetAll(FOLDER_PATH);
+  return response
 }
 
-export async function serviceDeleteFolder(id) {
-  try {
-    let response = await fetch('http://localhost:8080/folder/' + id, {
-      method: 'DELETE',
-    });
-    let data = await response.json();
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${data.message}`);
-    } else {
-      return true
-    }
-  } catch (err) {
-    console.warn("Something went wrong fetching the API...", err);
-  }
-};
+export async function sDeleteFolder(id) {
+  var response = await serviceDelete(FOLDER_PATH, id);
+  return response
+}
 
-export async function serviceAddFolder(details) {
-  const requestOptions = {
-    method: 'POST',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: dataToRequestDetails(details)
-  };
+export async function sUpdateFolder(id, details) {
+  var response = await serviceUpdate(FOLDER_PATH, details, id);
+  return response
+}
 
-  try {
-    let response = await fetch('http://localhost:8080/folder/add', requestOptions);
-    let data = await response
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${data.message}`);
-    } else {
-      return true
-    }
-  } catch (err) {
-    console.warn("Something went wrong fetching the API...", err);
-  }
-};
-
-export async function serviceUpdateFolder(details, id) {
-  const requestOptions = {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: dataToRequestDetails(details)
-  };
-
-  try {
-    let response = await fetch('http://localhost:8080/folder/' + id, requestOptions);
-    let data = await response.json()
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${data.message}`);
-    } else {
-      return true
-    }
-  } catch (err) {
-    console.warn("Something went wrong fetching the API...", err);
-  }
-};
+export async function sAddFolder(details) {
+  var response = await serviceAdd(FOLDER_PATH, details);
+  return response
+}

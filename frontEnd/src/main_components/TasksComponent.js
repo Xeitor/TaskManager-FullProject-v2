@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TaskForm from '../forms/TaskForm';
 import TaskTable from '../tables/TaskTable';
-import { serviceGetTask, serviceDeleteTask, serviceAddTask, serviceUpdateTask } from '../services/TaskService';
+import {  sDeleteTask, sUpdateTask, sAddTask } from '../services/TaskService';
 
 const TasksComponent = (props) => {
   // Tasks
@@ -13,7 +13,7 @@ const TasksComponent = (props) => {
   const [loadingTask, setLoadingTask] = useState(true);
 
   const addTask = (details) => {
-    serviceAddTask(details).then((response) => {
+    sAddTask(details).then((response) => {
       if (response) {
         props.setLoadingTask(true);
       }
@@ -22,7 +22,7 @@ const TasksComponent = (props) => {
   };
 
   const deleteTask = (id) => {
-    serviceDeleteTask(id).then((response) => {
+    sDeleteTask(id).then((response) => {
       if (response) {
         props.setTasks(props.tasks.filter((task) => task.id !== id));
       }
@@ -35,8 +35,9 @@ const TasksComponent = (props) => {
   };
 
   const updateTask = (details, id) => {
-    serviceUpdateTask(details, id).then((response) => {
+    sUpdateTask(id, details).then((response) => {
       if (response) {
+        console.log("should be executing");
         props.setLoadingTask(true);
       }
     })

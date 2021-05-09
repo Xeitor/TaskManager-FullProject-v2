@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import FoldersComponent from './FoldersComponent';
 import TasksComponent from './TasksComponent';
-import { serviceGetFolder, serviceDeleteFolder, serviceAddFolder, serviceUpdateFolder } from '../services/FolderService';
-import { serviceGetTask, serviceDeleteTask, serviceAddTask, serviceUpdateTask } from '../services/TaskService';
+import {  getAllTasks } from '../services/TaskService';
+import {  getAllFolders } from '../services/FolderService';
 
 const MainComponent = (props) => {
   // Folders
@@ -11,7 +11,7 @@ const MainComponent = (props) => {
 
   useEffect(() => {
     if (loadingFolder) {
-      serviceGetFolder().then((data) => setFolders(data))
+      getAllFolders().then((data) => setFolders(data))
       setLoadingFolder(false);
     }
   }, [loadingFolder]);
@@ -22,7 +22,7 @@ const MainComponent = (props) => {
 
   useEffect(() => {
     if (loadingTask) {
-      serviceGetTask().then((data) => setTasks(data))
+      getAllTasks().then((data) => setTasks(data))
       setLoadingTask(false);
     }
   }, [loadingTask]);

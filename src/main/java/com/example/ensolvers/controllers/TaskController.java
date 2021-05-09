@@ -2,7 +2,7 @@ package com.example.ensolvers.controllers;
 
 import com.example.ensolvers.models.Folder;
 import com.example.ensolvers.models.Task;
-import com.example.ensolvers.models.TaskDTO;
+import com.example.ensolvers.dtos.TaskDTO;
 import com.example.ensolvers.repositories.FolderRepository;
 import com.example.ensolvers.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class TaskController {
 
     // crear tarea
     @PostMapping(path="/task/add")
-    public @ResponseBody String addNewTask (@RequestParam(name="description") String description,
+    public ResponseEntity<TaskDTO> addNewTask (@RequestParam(name="description") String description,
                                             @RequestParam(name="state", required=false) Task.State state,
                                             @RequestParam(name="folderId", required=false) Integer folderId) {
         Task task = new Task();
@@ -35,8 +35,8 @@ public class TaskController {
                             .orElseThrow(() -> new ResourceNotFoundException("No se encontró carpeta con el con el id: " + folderId));
             task.setFolder(folder);
         }
-        taskRepository.save(task);
-        return "Tarea guardada";
+        task = taskRepository.save(task);
+        return ResponseEntity.ok(new TaskDTO(task));
     }
 
     // mostrar tareas

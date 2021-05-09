@@ -36,7 +36,7 @@ const FolderForm = (props) => {
       var details = {
         name: folder.name,
       };
-      props.addFolder(details);
+      props.updateFolder(details, folder.id);
       setFolder(initFolder);
     }
   }
