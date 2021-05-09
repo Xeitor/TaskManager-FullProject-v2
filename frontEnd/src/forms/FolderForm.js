@@ -5,9 +5,6 @@ const FolderForm = (props) => {
   const initFolder = {id: null, name: ''};
 
   const [folder, setFolder] = useState(initFolder);
-  useEffect(() => {
-    setFolder(props.currentFolder);
-  }, [props.currentFolder]);
 
   useEffect(() => {
     if (props.editing) {
@@ -15,8 +12,7 @@ const FolderForm = (props) => {
     } else {
       setFolder(initFolder);
     }
-  }, [props.editing]);
-
+  }, [props.currentFolder, props.editing]);
 
   const handleChange = e => {
     const {name, value} = e.target;
