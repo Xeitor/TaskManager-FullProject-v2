@@ -20,6 +20,16 @@ const FoldersComponent = (props) => {
     //setFoldersInFolser(false);
   };
 
+  const updateFolder = (details, id) => {
+    serviceUpdateFolder(details, id).then((response) => {
+      if (response) {
+        props.setLoadingFolder(true);
+      }
+    })
+    setCurrentFolder(initialFolder);
+    setEditing(false);
+  };
+
   const deleteFolder = (id) => {
     serviceDeleteFolder(id).then((response) => {
       if (response) {
@@ -32,16 +42,6 @@ const FoldersComponent = (props) => {
   const editFolder = (id, folder) => {
     setEditing(true);
     setCurrentFolder(folder);
-  };
-
-  const updateFolder = (details, id) => {
-    serviceUpdateFolder(details, id).then((response) => {
-      if (response) {
-        props.setLoadingFolder(true);
-      }
-    })
-    setCurrentFolder(initialFolder);
-    setEditing(false);
   };
 
   return (
