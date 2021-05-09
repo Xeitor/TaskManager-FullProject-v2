@@ -5,7 +5,7 @@ import { serviceGetTask, serviceDeleteTask, serviceAddTask, serviceUpdateTask } 
 
 const TasksComponent = (props) => {
   // Tasks
-  const initialTask = { id: null, description: "", state: "" };
+  const initialTask = { id: null, description: "", state: "", folderId: null, folderName: ''};
 
   const [editing, setEditing] = useState(false);
   const [currentTask, setCurrentTask] = useState(initialTask);
@@ -35,8 +35,8 @@ const TasksComponent = (props) => {
   };
 
   const editTask = (id, task) => {
-    setEditing(true);
     setCurrentTask(task);
+    setEditing(true);
   };
 
   const updateTask = (details, id) => {

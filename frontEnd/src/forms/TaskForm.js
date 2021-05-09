@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 const TaskForm = (props) => {
 
-  const initTask = { id: null, description: "", state: "" };
+  const initTask = { id: null, description: "", state: "", folderId: '', folderName: ''};
   const [task, setTask] = useState(initTask);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const TaskForm = (props) => {
     if (!task.folderId) {
       task.folderId = ''
     }
-    if (!task.state) {task.state = 'NOCOMPLETADA'}; //comentar posiblemente
+    if (!task.state) {task.state = 'NOCOMPLETADA'}; //default value for state
     if (task.description) {
       //  handleChange(e, props.addTask(task));
       var details = {
@@ -46,6 +46,7 @@ const TaskForm = (props) => {
         folderId: task.folderId
       };
       props.updateTask(details, task.id);
+      setTask(initTask);
     }
   }
 
@@ -62,7 +63,7 @@ const TaskForm = (props) => {
     </select>
     <label>Folder</label>
     <select className="u-full-width" type="text" value={task.folderId} name="folderId" onChange={handleChange}>
-    <option value="" onChange={handleChange} name="taskId"> - </option>
+    <option value="" onChange={handleChange} name="folderId"> - </option>
     { props.folders && props.folders.length > 0 ? (
         props.folders.map(folder => {
             const {id, name} = folder;
