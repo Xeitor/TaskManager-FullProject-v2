@@ -29,6 +29,9 @@ const MainComponent = (props) => {
 
   // Show tasks in folder hook
   const [tasksInFolder, setTasksInFolder] = useState(null);
+  useEffect(() => {
+    setTasksInFolder(null);
+  }, [tasks, folders]);
 
   return (
     <div className="container">
