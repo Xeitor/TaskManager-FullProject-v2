@@ -5,6 +5,7 @@ import AddTaskForm from './forms/AddTaskForm';
 import EditTaskForm from './forms/EditTaskForm';
 import AddFolderForm from './forms/AddFolderForm';
 import EditFolderForm from './forms/EditFolderForm';
+import FoldersComponent from './main_components/FoldersComponent';
 import { serviceGetTask, serviceDeleteTask, serviceAddTask, serviceUpdateTask } from './TaskService';
 var aux = null;
 
@@ -72,9 +73,13 @@ const App = () => {
   // folders
 
   const [folders, setFolders] = useState([]);
+
   return (
     <div className="container">
       <h1>Task manager app</h1>
+      <div className="folders">
+      <FoldersComponent />
+      </div>
     <div class="rootDiv">
       <div class="tasks">
       <div className="editTaskForm">
@@ -108,6 +113,7 @@ const App = () => {
       </div>
     </div>
     </div>
+
   );
 };
 
