@@ -1,5 +1,8 @@
 # Task Manager - Ensolvers  
+## Live version
+Hosted on a digital ocean droplet: http://142.93.207.116:3000/
 
+## Introduccion
 Para el desarrollo del proyecto elegí utilizar Spring Boot para la API, React para el frontend y Mysql para la persistencia de los datos.
 
 La API está escrita en Java y usa el paquete Spring Web. Sigue una arquitectura de controladores, modelos y repositorios. El paquete de Spring Web proporciona soluciones limpias y flexibles para aplicaciones que siguen esta arquitectura. A pesar de que se puede mejorar en aspectos como testing y manejo de errores pude alcanzar el nivel de robustez buscado. 
