@@ -47,6 +47,7 @@ export async function serviceDelete(url, id) {
     }
   } catch (err) {
     console.warn("Something went wrong fetching the API...", err);
+    return false
   }
 };
 
@@ -68,6 +69,7 @@ export async function serviceAdd(url, details) {
     }
   } catch (err) {
     console.warn("Something went wrong fetching the API...", err);
+    return false
   }
 };
 
@@ -88,5 +90,6 @@ export async function serviceUpdate(url, details, id) {
     }
   } catch (err) {
     console.warn("Something went wrong fetching the API...", err);
+    return false
   }
 };

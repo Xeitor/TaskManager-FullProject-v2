@@ -3,21 +3,17 @@ import { serviceGetAll, serviceDelete, serviceAdd, serviceUpdate } from '../serv
 const TASK_PATH = 'http://localhost:8080/task/';
 
 export async function getAllTasks() {
-  var response = await serviceGetAll(TASK_PATH);
-  return response
+  return serviceGetAll(TASK_PATH);
 }
 
 export async function sDeleteTask(id) {
-  var response = await serviceDelete(TASK_PATH, id);
-  return response
+  return serviceDelete(TASK_PATH, id);
 }
 
 export async function sUpdateTask(id, details) {
-  var response = await serviceUpdate(TASK_PATH, details, id);
-  return response
+  return serviceUpdate(TASK_PATH, details, id);
 }
 
 export async function sAddTask(details) {
-  var response = await serviceAdd(TASK_PATH, details);
-  return response
+  return serviceAdd(TASK_PATH, details);
 }
