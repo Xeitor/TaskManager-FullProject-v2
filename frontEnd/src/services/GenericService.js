@@ -21,7 +21,7 @@ const requestOptionsGet = {
 
 export async function serviceGetAll(url) {
   try {
-      const response = await fetch(url + '/all', requestOptionsGet);
+      const response = await fetch(url + 'all', requestOptionsGet);
       let data = await response.json();
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${data.message}`);
@@ -60,7 +60,7 @@ export async function serviceAdd(url, details) {
   };
 
   try {
-    let response = await fetch(url + '/add', requestOptions);
+    let response = await fetch(url + 'add', requestOptions);
     let data = await response.json()
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${data.message}`);
